@@ -1,5 +1,6 @@
 import { ReactNode, createContext, useContext, useState } from "react";
 import { Cart } from "../components/Cart.tsx";
+import { useLocalStorage } from "../hooks/useLocalStorage.ts";
 
 type T_ShoppingCartProviderPops = {
 	children: ReactNode;
@@ -28,7 +29,7 @@ export function useShoppingCart() {
 }
 
 export function ShoppingCartProvider({ children }: T_ShoppingCartProviderPops) {
-	const [cartItems, setCartItems] = useState<T_CartItem[]>([]);
+	const [cartItems, setCartItems] = useLocalStorage<T_CartItem[]>("cart", []);
 
 	const [isOpen, setIsOpen] = useState(false);
 
